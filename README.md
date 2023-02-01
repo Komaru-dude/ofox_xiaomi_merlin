@@ -1,8 +1,11 @@
-Device Tree for Redmi Note 8 Pro (begonia)
-==========================================
+# Device Tree for Redmi Note 8 Pro (begonia)
 
 The Redmi Note 8 Pro (codenamed _"begonia"_) is a high-end, mid-range smartphone from Xiaomi.
 It was released in September 2019.
+
+Kernel source: "https://github.com/begonia-recovery/twrp_kernel_xiaomi_begonia.git"
+==================================
+## Device specifications
 
 | Basic                   | Spec Sheet                                                                                                                     |
 | -----------------------:|:------------------------------------------------------------------------------------------------------------------------------ |
@@ -21,9 +24,28 @@ It was released in September 2019.
 This tree only supports non-CFW ROMs (Android 12 and higher) based on MIUI 12.5+ firmwares
 This tree does not support MIUI ROMs
 
-## Copyright
-**Copyright (C) 2022 Team Win Recovery Project**
-**Copyright (C) 2023 OrangeFox Recovery Project**
-
 ## Device picture
 ![begonia](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-8-pro-twilight-orange.jpg)
+
+### Copyright
+ ```
+  /*
+  *  Copyright (C) 2022 Team Win Recovery Project
+  *
+  *  Copyright (C) 2023 The OrangeFox Recovery Project
+  *
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 3 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  *
+  */
+  ```
