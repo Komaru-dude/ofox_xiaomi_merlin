@@ -3,8 +3,6 @@
 The Redmi Note 8 Pro (codenamed _"begonia"_) is a high-end, mid-range smartphone from Xiaomi.
 It was released in September 2019.
 
-Kernel source: "https://github.com/begonia-recovery/twrp_kernel_xiaomi_begonia.git"
-==================================
 ## Device specifications
 
 | Basic                   | Spec Sheet                                                                                                                     |
@@ -21,12 +19,16 @@ Kernel source: "https://github.com/begonia-recovery/twrp_kernel_xiaomi_begonia.g
 | Camera (Front)          | 20 MP, f/2.0, 0.9µm                                                                                                           |
 
 ## Notes
-This tree only supports non-CFW ROMs (Android 12 and higher) based on MIUI 12.5+ firmwares
-This tree does not support MIUI ROMs
+This tree only supports non-CFW ROMs (Android 12 and higher) based on MIUI 12.5+ firmwares. This tree does not support MIUI ROMs.
 
 ## Device picture
 ![begonia](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-8-pro-twilight-orange.jpg)
 
+---
+## Kernel sources
+"https://github.com/begonia-recovery/twrp_kernel_xiaomi_begonia.git"
+
+---
 ### Copyright
  ```
   /*
