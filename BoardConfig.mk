@@ -14,17 +14,18 @@ ALLOW_MISSING_DEPENDENCIES := true
 
 # Architecture
 TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-2a
+TARGET_ARCH_VARIANT := armv8-2a-dotprod
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := cortex-a76
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-2a
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a55
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a76
 
 # AVB
 BOARD_AVB_ENABLE := true
@@ -61,7 +62,7 @@ else
 endif
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_DIRECTORY)/dtb
+BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_DIRECTORY)/dtbs
 BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_DIRECTORY)/dtbo.img
 TARGET_PREBUILT_KERNEL := $(KERNEL_DIRECTORY)/Image.gz
 BOARD_KERNEL_SEPARATED_DTBO := true
@@ -108,4 +109,13 @@ TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone4/temp
 # Debug flags
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
+
+# Private test builds?
+ifeq ($(LOCAL_TEST_BUILD),1)
+  PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/Testing/,$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/)
+endif
+
+# device-specific decryption stuff
+#TW_LEGACY_PROCESS_FSTAB := true
+#TW_PREPARE_DATA_MEDIA_EARLY := true
 #
