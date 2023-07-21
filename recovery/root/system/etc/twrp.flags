@@ -28,5 +28,5 @@
 /protect_s        ext4     /dev/block/platform/bootdevice/by-name/protect2     flags=backup=1;display="Protect S"
 
 /sdcard1      	  vfat     /dev/block/mmcblk0p1  /dev/block/mmcblk0            flags=display="MicroSD";storage;wipeingui;removable;fsflags="utf8"
-/usb_otg       	  vfat     /dev/block/sdd1  /dev/block/sdd                     flags=display="USB Storage";storage;wipeingui;removable;fsflags="utf8"
+/usb_otg       	  auto     /dev/block/sdd1  /dev/block/sdd                     flags=display="USB Storage";storage;wipeingui;removable;fsflags="utf8"
 #
