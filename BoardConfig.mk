@@ -114,8 +114,4 @@ TARGET_USES_LOGD := true
 ifeq ($(LOCAL_TEST_BUILD),1)
   PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/Testing/,$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/)
 endif
-
-# device-specific decryption stuff
-#TW_LEGACY_PROCESS_FSTAB := true
-#TW_PREPARE_DATA_MEDIA_EARLY := true
 #
