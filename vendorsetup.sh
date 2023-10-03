@@ -66,7 +66,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
 	# necessary to decrypt most begonia ROMs
 	export OF_FIX_DECRYPTION_ON_DATA_MEDIA=1
-	export OF_LEGACY_PROCESS_FSTAB=1
+	export OF_FORCE_USE_RECOVERY_FSTAB=1; # same as setting "PRODUCT_PROPERTY_OVERRIDES += ro.tw.addition_fstab=false"
 
        	# ensure that /sdcard is bind-unmounted before f2fs data repair or format
        	export OF_UNBIND_SDCARD_F2FS=1
