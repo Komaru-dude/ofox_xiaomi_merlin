@@ -34,16 +34,10 @@ if [ -z "$1" -a -z "$FOX_BUILD_DEVICE" ]; then
 fi
 
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
-        export FOX_ENABLE_APP_MANAGER=1
         export ALLOW_MISSING_DEPENDENCIES=true
+        export FOX_ENABLE_APP_MANAGER=1
 	export TARGET_DEVICE_ALT="begoniain"
 	export FOX_TARGET_DEVICES="begoniain,begonia"
-        export OF_SCREEN_H=2340
-        export OF_STATUS_H=80
-	export OF_DONT_PATCH_ENCRYPTED_DEVICE=1
-	export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
-	export OF_SKIP_MULTIUSER_FOLDERS_BACKUP=1
-	export OF_FBE_METADATA_MOUNT_IGNORE=1
 	export FOX_USE_BASH_SHELL=1
 	export FOX_ASH_IS_BASH=1
 	export FOX_USE_NANO_EDITOR=1
@@ -51,31 +45,9 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_ZIP_BINARY=1
 	export FOX_USE_SED_BINARY=1
 	export FOX_USE_XZ_UTILS=1
-	export OF_USE_GREEN_LED=0
 
-	# patch avb20 - some ROM recoveries try to overwrite custom recoveries
-	export OF_PATCH_AVB20=1
-
-	# quick backup defaults
-        export OF_QUICK_BACKUP_LIST="/boot;/data;/system_image;/vendor_image;"
-
-	# whether to permit free access to internal storage
-	export OF_RUN_POST_FORMAT_PROCESS=1
-
-	export FOX_BUGGED_AOSP_ARB_WORKAROUND="1546300800"; # Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
-
-	# necessary to decrypt most begonia ROMs
-	export OF_FIX_DECRYPTION_ON_DATA_MEDIA=1
-	export OF_FORCE_USE_RECOVERY_FSTAB=1; # same as setting "PRODUCT_PROPERTY_OVERRIDES += ro.tw.addition_fstab=false"
-
-       	# ensure that /sdcard is bind-unmounted before f2fs data repair or format
-       	export OF_UNBIND_SDCARD_F2FS=1
-
-	# flashlight doesn't work
-	export OF_FLASHLIGHT_ENABLE=0
-
-	# no MIUI stuff
-	export OF_DISABLE_OTA_MENU=1
+	# Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
+	export FOX_BUGGED_AOSP_ARB_WORKAROUND=1546300800
 
 	# let's see what are our build VARs
 	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
