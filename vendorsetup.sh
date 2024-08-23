@@ -1,6 +1,6 @@
 #
 #	This file is part of the OrangeFox Recovery Project
-# 	Copyright (C) 2023 The OrangeFox Recovery Project
+# 	Copyright (C) 2023-2024 The OrangeFox Recovery Project
 #
 #	OrangeFox is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -48,9 +48,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_LZ4_BINARY=1
 	export FOX_USE_ZSTD_BINARY=1
 	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v27.0.zip
-
-	# Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
-	export FOX_BUGGED_AOSP_ARB_WORKAROUND=1546300800
 
 	# let's see what are our build VARs
 	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
