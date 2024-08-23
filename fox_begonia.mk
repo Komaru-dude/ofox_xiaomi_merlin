@@ -49,4 +49,7 @@ OF_FLASHLIGHT_ENABLE := 0
 
 # no MIUI stuff
 OF_DISABLE_OTA_MENU := 1
+
+# legacy services for battery
+OF_USE_LEGACY_BATTERY_SERVICES := 1
 #
