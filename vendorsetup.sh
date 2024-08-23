@@ -45,6 +45,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_ZIP_BINARY=1
 	export FOX_USE_SED_BINARY=1
 	export FOX_USE_XZ_UTILS=1
+	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v27.0.zip
 
 	# Tuesday, January 1, 2019 12:00:00 AM GMT+00:00
 	export FOX_BUGGED_AOSP_ARB_WORKAROUND=1546300800
