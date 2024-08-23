@@ -1,6 +1,6 @@
 #
 #	This file is part of the OrangeFox Recovery Project
-# 	Copyright (C) 2023 The OrangeFox Recovery Project
+# 	Copyright (C) 2023-2024 The OrangeFox Recovery Project
 #
 #	OrangeFox is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@ OF_STATUS_INDENT_RIGHT := 48
 # other stuff
 OF_DONT_PATCH_ENCRYPTED_DEVICE := 1
 OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
-OF_SKIP_MULTIUSER_FOLDERS_BACKUP := 1
 OF_FBE_METADATA_MOUNT_IGNORE := 1
 OF_USE_GREEN_LED := 0
 
@@ -39,10 +38,7 @@ OF_PATCH_AVB20 := 1
 # quick backup defaults
 OF_QUICK_BACKUP_LIST := /boot;/data;/system_image;/vendor_image;
 
-# whether to permit free access to internal storage
-OF_RUN_POST_FORMAT_PROCESS := 1
-
-# necessary to decrypt most begonia ROMs
+# necessary to decrypt most begonia ROMs (trigger "TW_PREPARE_DATA_MEDIA_EARLY")
 OF_FIX_DECRYPTION_ON_DATA_MEDIA := 1
 
 # ensure that /sdcard is bind-unmounted before f2fs data repair or format
