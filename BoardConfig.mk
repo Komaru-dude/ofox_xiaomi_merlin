@@ -110,6 +110,9 @@ TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone4/temp
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 
+# support "fastboot update <zip-file>"
+TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
+
 # Private test builds?
 ifeq ($(LOCAL_TEST_BUILD),1)
   PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/Testing/,$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/)
