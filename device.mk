@@ -46,5 +46,5 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
 
 # additional fstab? No!
-TW_SKIP_ADDITIONAL_FSTAB := true
+#TW_SKIP_ADDITIONAL_FSTAB := true
 #
