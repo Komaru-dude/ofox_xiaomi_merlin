@@ -47,4 +47,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 
 # additional fstab? No!
 #TW_SKIP_ADDITIONAL_FSTAB := true
+
+# framerate
+TW_FRAMERATE := 90
 #
