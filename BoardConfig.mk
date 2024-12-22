@@ -2,7 +2,7 @@
 # Copyright (C) 2022 The Android Open Source Project
 # Copyright (C) 2022 SebaUbuntu's TWRP device tree generator
 #
-# Copyright (C) 2023 The OrangeFox Recovery Project
+# Copyright (C) 2023-2024 The OrangeFox Recovery Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -21,6 +21,7 @@ TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := cortex-a76
 
 TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
@@ -48,7 +49,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_USES_MKE2FS := true
-BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz
@@ -64,8 +64,7 @@ endif
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_DIRECTORY)/dtbs
 BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_DIRECTORY)/dtbo.img
-TARGET_PREBUILT_KERNEL := $(KERNEL_DIRECTORY)/Image.gz
-BOARD_KERNEL_SEPARATED_DTBO := true
+TARGET_PREBUILT_KERNEL := $(KERNEL_DIRECTORY)/Image.gz-dtb
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_BOOTIMG_HEADER_VERSION := 2
 BOARD_KERNEL_BASE := 0x40078000
@@ -83,6 +82,7 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 TARGET_BOARD_PLATFORM := mt6785
 
 # Properties
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Recovery
@@ -106,6 +106,10 @@ TW_INCLUDE_REPACKTOOLS := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone4/temp
 
+# deal with broken stuff
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # Debug flags
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
@@ -117,4 +121,13 @@ TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 ifeq ($(LOCAL_TEST_BUILD),1)
   PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/Testing/,$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/)
 endif
+
+# copy the correct keymaster beanpod  blob
+ifneq ($(filter HWe HWE dynamic,$(FOX_VARIANT)),)
+  KEYMASTER_BEANPOD_DIR := $(DEVICE_PATH)/recovery/root/hw_encrypt
+else
+  KEYMASTER_BEANPOD_DIR := $(DEVICE_PATH)/recovery/root/sw_encrypt
+endif
+
+PRODUCT_COPY_FILES += $(KEYMASTER_BEANPOD_DIR)/android.hardware.keymaster@4.0-service.beanpod:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
 #
