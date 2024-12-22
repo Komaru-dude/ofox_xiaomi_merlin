@@ -39,7 +39,7 @@ process_fstab_files() {
   	TESTING_LOG "Dynamic ROM";
   	setprop "is_dynamic_rom" "true"; # save as a prop
   	if [ "$D1" = "0" ]; then # this is a non-dynamic OrangeFox build
-  		LOGMSG "The installed ROM has retrofitted dynamic partitions. Flash a non-dynamic ROM, or get the dynamic release of OrangeFox.";
+		LOGMSG "The installed ROM has retrofitted dynamic partitions.";
 	else
 		resetprop "fox_dynamic_device" "1";
   	fi
@@ -47,7 +47,7 @@ process_fstab_files() {
     	TESTING_LOG "Non-dynamic ROM";
   	setprop "is_dynamic_rom" "false"; # save as a prop
   	if [ "$D1" = "1" ]; then # this is a dynamic OrangeFox build
-  		TESTING_LOG "The installed ROM is non-dynamic. Flash a dynamic/retrofitted ROM, or get the standard release of OrangeFox.";
+		TESTING_LOG "The installed ROM is non-dynamic.";
   		resetprop "fox_dynamic_device" "0";
 	fi
   fi
