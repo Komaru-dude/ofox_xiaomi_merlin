@@ -130,4 +130,29 @@ else
 endif
 
 PRODUCT_COPY_FILES += $(KEYMASTER_BEANPOD_DIR)/android.hardware.keymaster@4.0-service.beanpod:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
+
+# retrofitted dynamic partitions?
+ifeq ($(FOX_USE_DYNAMIC_PARTITIONS),1)
+  BOARD_SUPER_PARTITION_BLOCK_DEVICES := vendor system
+  BOARD_SUPER_PARTITION_METADATA_DEVICE := system
+  BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 1610612736
+  BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3758096384
+  BOARD_SUPER_PARTITION_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE) + $(BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE))
+  BOARD_SUPER_PARTITION_GROUPS := xiaomi_dynamic_partitions
+  BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
+  BOARD_XIAOMI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor
+
+  TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/fstab_files/recovery-dynamic.fstab
+  PRODUCT_COPY_FILES += $(DEVICE_PATH)/recovery/fstab_files/twrp-dynamic.flags:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/twrp.flags
+  BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+else
+  TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/fstab_files/recovery-non-dynamic.fstab
+  PRODUCT_COPY_FILES += $(DEVICE_PATH)/recovery/fstab_files/twrp-non-dynamic.flags:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/twrp.flags
+endif
+
+# copy recovery/fstab_files/ from the device directory (if it exists)
+ifneq ($(wildcard $(DEVICE_PATH)/recovery/fstab_files/.),)
+    PRODUCT_COPY_FILES += \
+        $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/fstab_files/*,$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/)
+endif
 #
