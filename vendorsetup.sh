@@ -40,22 +40,15 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_TARGET_DEVICES="begoniain,begonia"
 	export FOX_USE_BASH_SHELL=1
 	export FOX_ASH_IS_BASH=1
-	export FOX_USE_NANO_EDITOR=1
+	export FOX_BASH_TO_SYSTEM_BIN=1
 	export FOX_USE_TAR_BINARY=1
-	export FOX_USE_ZIP_BINARY=1
-	export FOX_USE_SED_BINARY=1
 	export FOX_USE_XZ_UTILS=1
 	export FOX_USE_LZ4_BINARY=1
 	export FOX_USE_ZSTD_BINARY=1
 	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v27.0.zip
-
-	# let's see what are our build VARs
-	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
-  	   export | grep "FOX" >> $FOX_BUILD_LOG_FILE
-  	   export | grep "OF_" >> $FOX_BUILD_LOG_FILE
-   	   export | grep "TARGET_" >> $FOX_BUILD_LOG_FILE
-  	   export | grep "TW_" >> $FOX_BUILD_LOG_FILE
- 	fi
+	export FOX_VANILLA_BUILD=1
+	export FOX_DELETE_INITD_ADDON=1
+	export FOX_USE_BUSYBOX_BINARY=1
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then
 		echo "I: This script requires bash. Not processing the $FDEVICE $(basename $0)"
