@@ -4,6 +4,7 @@
 
 # TODO: Add 'check' as fs_mgr_flags with data partition.
 # Currently we dont have e2fsck compiled. So fs check would failed.
+# @TODO - add credits
 
 #<src>                            		<mnt_point>           	<type>   <mnt_flags and options>                                         <fs_mgr_flags>
 system					        /system     		erofs     ro                                                 		wait,avb=vbmeta,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
