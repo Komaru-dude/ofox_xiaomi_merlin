@@ -26,7 +26,7 @@ This tree only supports non-CFW ROMs (Android 12 and higher) based on MIUI 12.5+
 
 ---
 ## Kernel sources
-"https://github.com/begonia-recovery/twrp_kernel_xiaomi_begonia.git"
+"https://github.com/Nova-Kernels/kernel_xiaomi_mt6785.git"
 
 ---
 ### Copyright
@@ -34,7 +34,7 @@ This tree only supports non-CFW ROMs (Android 12 and higher) based on MIUI 12.5+
   /*
   *  Copyright (C) 2022 Team Win Recovery Project
   *
-  *  Copyright (C) 2023 The OrangeFox Recovery Project
+  *  Copyright (C) 2023-2024 The OrangeFox Recovery Project
   *
   * This program is free software: you can redistribute it and/or modify
   * it under the terms of the GNU General Public License as published by
