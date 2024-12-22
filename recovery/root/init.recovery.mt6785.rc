@@ -8,7 +8,7 @@ on init
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
-on fs
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
     install_keyring
 
 service unified-script /system/bin/unified-script.sh
@@ -18,13 +18,22 @@ service unified-script /system/bin/unified-script.sh
     oneshot
     seclabel u:r:recovery:s0
 
+service fix_decryption /system/bin/fix_decryption.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
 service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
     disabled
     seclabel u:r:recovery:s0
 
 service keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
     user root
     group root drmrpc
     disabled
@@ -58,6 +67,15 @@ on property:twrp.decrypt.done=true
     stop servicemanager
     stop hwservicemanager
 
+on early-fs
+    write /proc/bootprof "INIT:early-fs"
+    start vold
+
 on boot
     start unified-script
+
+on init
+    start fix_decryption
+    exec u:r:recovery:s0 -- /system/bin/sleep 0.5s
+    exec u:r:recovery:s0 -- /system/bin/fix_dynamic_static.sh
 #
