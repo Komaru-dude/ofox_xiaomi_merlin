@@ -49,6 +49,13 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_VANILLA_BUILD=1
 	export FOX_DELETE_INITD_ADDON=1
 	export FOX_USE_BUSYBOX_BINARY=1
+
+	if [ "$BEGONIA_HW_ENCRYPTION" = "1" -o "$FOX_USE_DYNAMIC_PARTITIONS" = "1" ]; then
+		export FOX_USE_DYNAMIC_PARTITIONS=1
+		export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
+		export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
+		export FOX_VARIANT="HWe"
+	fi
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then
 		echo "I: This script requires bash. Not processing the $FDEVICE $(basename $0)"
