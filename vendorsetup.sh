@@ -45,7 +45,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_XZ_UTILS=1
 	export FOX_USE_LZ4_BINARY=1
 	export FOX_USE_ZSTD_BINARY=1
-	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v27.0.zip
+	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v28.1.zip
 	export FOX_VANILLA_BUILD=1
 	export FOX_DELETE_INITD_ADDON=1
 	export FOX_USE_BUSYBOX_BINARY=1
