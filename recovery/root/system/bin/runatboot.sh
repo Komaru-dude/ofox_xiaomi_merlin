@@ -73,7 +73,17 @@ local d=$(getprop "ro.orangefox.fastbootd");
 	resetprop "ro.orangefox.variant" "dynamic-hw-encrypt-with-non-dynamic-rom";
 }
 
+# run a user_defined autoexec script at bootup
+autorun_user() {
+local F="/sdcard/Fox/fox_autoexec.sh";
+	if [ -f $F ]; then
+		chmod 0755 $F;
+		$F;
+	fi
+}
+
 # ---
 morph_into_non_dynamic;
+autorun_user;
 exit 0;
 # ---
