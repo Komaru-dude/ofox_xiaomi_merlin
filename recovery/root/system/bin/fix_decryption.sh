@@ -32,13 +32,15 @@ local F=/FFiles/temp/beanpod.blob;
     	umount $D;
 	rmdir $D;
 
-	local T=$(grep libshim $F);
-	if [ -n "$T" ]; then
-		TESTING_LOG "Hardware encryption found";
-		resetprop "ro.orangefox.variant" "hw_encryption";
-		resetprop "fox.hardware.encryption" "1";
-		echo "1";
-		return;
+	if [ -f "$F" ]; then
+		local T=$(grep libshim $F);
+		if [ -n "$T" ]; then
+			TESTING_LOG "Hardware encryption found";
+			resetprop "ro.orangefox.variant" "hw_encryption";
+			resetprop "fox.hardware.encryption" "1";
+			echo "1";
+			return;
+		fi
 	fi
 
 	TESTING_LOG "Hardware encryption NOT found!";
