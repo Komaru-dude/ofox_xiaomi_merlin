@@ -47,7 +47,7 @@ local d=$(getprop "ro.orangefox.fastbootd");
 
 	# if we get here, we are running a standard ROM on a dynamic/retrofitted-dynamic recovery
 	# try to convert this recovery to a standard (non-dynamic) version
-	LOGMSG "This ROM does not have retrofitted dynamic partitions. There might be issues.";
+	LOGMSG "This ROM does not have retrofitted dynamic partitions.";
 	resetprop "ro.orangefox.standard_rom_on_dynamic_recovery" "true"; # flag this problem
 
 	# deal with the (now) obsolete props
