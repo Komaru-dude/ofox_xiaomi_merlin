@@ -50,11 +50,12 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_DELETE_INITD_ADDON=1
 	export FOX_USE_BUSYBOX_BINARY=1
 
-	if [ "$BEGONIA_HW_ENCRYPTION" = "1" -o "$FOX_USE_DYNAMIC_PARTITIONS" = "1" ]; then
-		export FOX_USE_DYNAMIC_PARTITIONS=1
+	# make all builds dynamic
+	export FOX_USE_DYNAMIC_PARTITIONS=1
+	if [ "$FOX_USE_DYNAMIC_PARTITIONS" = "1" ]; then
 		export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
 		export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
-		export FOX_VARIANT="HWe"
+		export FOX_VARIANT="unified"
 	fi
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then
