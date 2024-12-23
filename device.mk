@@ -48,32 +48,38 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/recovery/security/miui
 
-# mark as hardware-backed encryption
-ifneq ($(filter HWe HWE dynamic,$(FOX_VARIANT)),)
-	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.orangefox.variant=hw_encryption
-else
-# else, mark as software-backed encryption
-	PRODUCT_PROPERTY_OVERRIDES += \
-		ro.orangefox.variant=sw_encryption
-endif
-
 # dynamic partitions, fastbootd, etc
 ifeq ($(FOX_USE_DYNAMIC_PARTITIONS),1)
+  PRODUCT_SHIPPING_API_LEVEL := 28
   PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-  # fastbootd - doesn't work!
-  TW_INCLUDE_FASTBOOTD := true
-  PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.0-impl-mock \
-    android.hardware.fastboot@1.0-impl-mock.recovery \
-    fastbootd
-
-  PRODUCT_PROPERTY_OVERRIDES += \
-	ro.fastbootd.available=true \
-
+  PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
+  
   PRODUCT_PROPERTY_OVERRIDES += \
 	ro.boot.dynamic_partitions_retrofit=true \
-	ro.boot.dynamic_partitions=true
+	ro.boot.dynamic_partitions=true \
+	ro.crypto.dm_default_key.options_format.version=2 \
+	ro.crypto.volume.filenames_mode=aes-256-cts \
+	ro.crypto.volume.metadata.method=dm-default-key \
+	ro.crypto.volume.options=::v2 \
+	ro.crypto.allow_encrypt_override=true
+
+  # fastbootd - doesn't work (device not detected)
+  TW_INCLUDE_FASTBOOTD := true
+  PRODUCT_PROPERTY_OVERRIDES += \
+	ro.fastbootd.available=true
+ 
+  PRODUCT_PACKAGES += \
+	android.hardware.fastboot@1.0-impl-mock \
+	android.hardware.fastboot@1.0-impl-mock.recovery \
+	fastbootd
+endif
+
+# initial prop for variant
+ifneq ($(FOX_VARIANT),)
+  PRODUCT_PROPERTY_OVERRIDES += \
+	ro.orangefox.variant=$(FOX_VARIANT)
+else
+  PRODUCT_PROPERTY_OVERRIDES += \
+	ro.orangefox.variant=default
 endif
 #
