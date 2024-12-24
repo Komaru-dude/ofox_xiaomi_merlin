@@ -37,6 +37,7 @@ local F=/FFiles/temp/beanpod.blob;
 		if [ -n "$T" ]; then
 			TESTING_LOG "Hardware encryption found";
 			resetprop "ro.orangefox.variant" "hw_encryption";
+			resetprop "ro.orangefox.encryption" "hardware";
 			resetprop "fox.hardware.encryption" "1";
 			echo "1";
 			return;
@@ -45,6 +46,7 @@ local F=/FFiles/temp/beanpod.blob;
 
 	TESTING_LOG "Hardware encryption NOT found!";
 	resetprop "ro.orangefox.variant" "sw_encryption";
+	resetprop "ro.orangefox.encryption" "software";
 	resetprop "fox.hardware.encryption" "0";
 	echo "0";
 }
