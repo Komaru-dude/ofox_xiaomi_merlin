@@ -20,7 +20,7 @@
 #
 
 # set to 1 during the testing phase, else set to 0
-debug_mode=1;
+debug_mode=0;
 
 # write a message to the log file
 LOGMSG() {
