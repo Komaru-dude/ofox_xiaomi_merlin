@@ -36,7 +36,11 @@ OF_USE_GREEN_LED := 0
 OF_PATCH_AVB20 := 1
 
 # quick backup defaults
-OF_QUICK_BACKUP_LIST := /boot;/data;/system_image;/vendor_image;
+ifeq ($(FOX_USE_DYNAMIC_PARTITIONS),1)
+   OF_QUICK_BACKUP_LIST := /boot;/data;
+else
+   OF_QUICK_BACKUP_LIST := /boot;/data;/system_image;/vendor_image;
+endif
 
 # necessary to decrypt most begonia ROMs (trigger "TW_PREPARE_DATA_MEDIA_EARLY")
 OF_FIX_DECRYPTION_ON_DATA_MEDIA := 1
