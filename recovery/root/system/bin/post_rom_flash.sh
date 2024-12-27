@@ -2,7 +2,7 @@
 
 #
 #	This file is part of the OrangeFox Recovery Project
-# 	Copyright (C) 2023-2024 The OrangeFox Recovery Project
+# 	Copyright (C) 2024 The OrangeFox Recovery Project
 #
 #	OrangeFox is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -31,11 +31,10 @@ local F=$(getprop "restore_fox_after_flashing");
 		if [ "$F" = "1" ]; then
 			LOGMSG "The ROM has changed the recovery, it seems.";
 			resetprop "found_fox_overwriting_rom" "";
-			F=/tmp/fox_backup.img;
-			if [ -f "$F" ]; then	
+			if [ -f "$BACKUP_F" ]; then	
 				LOGMSG "Restoring OrangeFox from backup ...";
-				cat $F /dev/zero > /dev/block/bootdevice/by-name/recovery 2>/dev/null;
-				rm $F;
+				cat $BACKUP_F /dev/zero > /dev/block/bootdevice/by-name/recovery 2>/dev/null;
+				rm $BACKUP_F;
  			fi
 		else
 			TESTING_LOG "POST_ROM_FLASH: the ROM did not change the recovery, it seems.";

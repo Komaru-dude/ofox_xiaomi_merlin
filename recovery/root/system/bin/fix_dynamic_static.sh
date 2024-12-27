@@ -31,7 +31,13 @@ process_fstab_files() {
   local src_fstab="/system/etc/recovery-non-dynamic.fstab";
   local src_flags="/system/etc/twrp-non-dynamic.flags";
 
-  local D1=$(is_dynamic_fox);
+	local D1=$(is_dynamic_fox);
+	# bale out if this isn't a dynamic OrangeFox build
+	if [ "$D1" != "1" ]; then
+		TESTING_LOG "Non-dynamic builds don't need this process, as they can't handle dynamic ROMs.";
+		return;
+	fi
+
   local D=$(rom_has_dynamic_partitions);  
   if [ "$D" = "1" ]; then
   	src_fstab="/system/etc/recovery-dynamic.fstab";
@@ -65,6 +71,5 @@ process_fstab_files() {
 # --- #
 TESTING_LOG "Running $0";
 process_fstab_files;
-setenforce 0;
 exit 0;
 #

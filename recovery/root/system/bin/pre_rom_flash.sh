@@ -2,7 +2,7 @@
 
 #
 #	This file is part of the OrangeFox Recovery Project
-# 	Copyright (C) 2023-2024 The OrangeFox Recovery Project
+# 	Copyright (C) 2024 The OrangeFox Recovery Project
 #
 #	OrangeFox is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 #
 # 	Please maintain this if you use this script or any part of it
 #
-#
 
 source /system/bin/begonia_funcs.sh
 
@@ -30,7 +29,7 @@ local F=$(getprop "restore_fox_after_flashing");
 		F=$(getprop "found_fox_overwriting_rom");
 		if [ "$F" = "1" ]; then
 			LOGMSG "PRE_ROM_FLASH: the ROM will change the recovery, it seems. Backing up OrangeFox to restore after flashing the ROM...";
-			dd bs=1048576 if="/dev/block/bootdevice/by-name/recovery" of="/tmp/fox_backup.img";
+			dd bs=1048576 if="/dev/block/bootdevice/by-name/recovery" of="$BACKUP_F";
 		else
 			TESTING_LOG "PRE_ROM_FLASH: the ROM has NOT changed the recovery, it seems.";
 		fi

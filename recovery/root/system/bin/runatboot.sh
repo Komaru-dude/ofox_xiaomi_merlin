@@ -83,6 +83,7 @@ local F="/sdcard/Fox/fox_autoexec.sh";
 }
 
 # ---
+setenforce 0;
 morph_into_non_dynamic;
 autorun_user;
 exit 0;
