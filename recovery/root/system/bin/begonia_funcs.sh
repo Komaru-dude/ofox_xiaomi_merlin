@@ -22,14 +22,32 @@
 # set to 1 during the testing phase, else set to 0
 debug_mode=0;
 
+# recovery log file
+LOGF="/tmp/recovery.log";
+
+# backup recovery image
+BACKUP_F="/tmp/fox_backup.img";
+
 # write a message to the log file
 LOGMSG() {
-	echo "I:$@" >> /tmp/recovery.log;
+	echo "I:$@" >> $LOGF;
 }
 
 # test-phase log messages
 TESTING_LOG() {
 	[ "$debug_mode" = "1" ] && LOGMSG "$@";
+}
+
+set_crypt_credentials() {
+	if [ "$1" = "soft" ]; then
+		resetprop "ro.orangefox.variant" "sw_encryption";
+		resetprop "ro.orangefox.encryption" "software";
+		resetprop "fox.hardware.encryption" "0";
+	else
+		resetprop "ro.orangefox.variant" "hw_encryption";
+		resetprop "ro.orangefox.encryption" "hardware";
+		resetprop "fox.hardware.encryption" "1";
+	fi
 }
 
 # are we running the dynamic variant of OrangeFox?
@@ -48,7 +66,7 @@ local v=$(getprop "ro.orangefox.variant");
 rom_has_dynamic_partitions() {
 # the device that we are building for
 local BUILD_DEVICE=begonia;
-  local markers=""$BUILD_DEVICE"_dynamic_partitions xiaomi_dynamic_partitions qti_dynamic_partitions "$BUILD_DEVICE"_dynpart xiaomi_dynpart qti_dynpart";
+  local markers="xiaomi_dynamic_partitions qti_dynamic_partitions "$BUILD_DEVICE"_dynamic_partitions "$BUILD_DEVICE"_dynpart xiaomi_dynpart qti_dynpart";
   local F=/tmp/blck_tmp;
   dd if=/dev/block/by-name/system bs=256k count=1 of=$F;
   strings $F | grep dyn > "$F.txt";
