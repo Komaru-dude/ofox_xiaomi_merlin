@@ -1,32 +1,35 @@
-# Device Tree for Redmi Note 8 Pro (begonia)
+# Device Tree for Redmi Note 9 (merlinx)
 
-The Redmi Note 8 Pro (codenamed _"begonia"_) is a high-end, mid-range smartphone from Xiaomi.
-It was released in September 2019.
+The Redmi Note 9 (codenamed _"merlinx"_) is a mid-range smartphone from Xiaomi.  
+It was released in May 2020.
 
 ## Device specifications
 
 | Basic                   | Spec Sheet                                                                                                                     |
 | -----------------------:|:------------------------------------------------------------------------------------------------------------------------------ |
 | CPU                     | Octa-core                                                                                                                      |
-| Chipset                 | Mediatek Helio G90T                                                                                                            |
-| GPU                     | Mali-G76 MC4                                                                                                                   |
-| Memory                  | 6/8 GB RAM                                                                                                                     |
-| Shipped Android Version | 9.0                                                                                                                            |
-| Storage                 | 64/128/256 GB                                                                                                                  |
-| Battery                 | Non-removable Li-Po 4500 mAh battery                                                                                           |
+| Chipset                 | Mediatek Helio G85                                                                                                            |
+| GPU                     | Mali-G52 MC2                                                                                                                   |
+| Memory                  | 3/4/6 GB RAM                                                                                                                   |
+| Shipped Android Version | 10.0                                                                                                                           |
+| Storage                 | 64/128 GB                                                                                                                      |
+| Battery                 | Non-removable Li-Po 5020 mAh battery                                                                                           |
 | Display                 | 1080 x 2340 pixels, 19.5:9 ratio (~395 ppi density)                                                                            |
-| Camera (Rear - Main)    | 64 MP, f/1.9, 26mm (wide), 1/1.7", 0.8µm, PDAF                                                                                |
-| Camera (Front)          | 20 MP, f/2.0, 0.9µm                                                                                                           |
+| Camera (Rear - Main)    | 48 MP, f/1.8, 26mm (wide), 1/2.0", 0.8µm, PDAF                                                                                |
+| Camera (Rear - Ultra-Wide) | 8 MP, f/2.2, 118˚ (ultrawide), 1/4.0", 1.12µm                                                                         |
+| Camera (Rear - Macro)   | 2 MP, f/2.4, (macro), AF                                                                                                      |
+| Camera (Rear - Depth)   | 2 MP, f/2.4, (depth)                                                                                                         |
+| Camera (Front)          | 13 MP, f/2.3 
 
 ## Notes
-This tree only supports non-CFW ROMs (Android 12 and higher) based on MIUI 12.5+ firmwares. This tree does not support MIUI ROMs.
+This tree does not support MIUI ROMs.
 
 ## Device picture
-![begonia](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-8-pro-twilight-orange.jpg)
+![merlinx](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-9-4.jpg)
 
 ---
 ## Kernel sources
-"https://github.com/Nova-Kernels/kernel_xiaomi_mt6785.git"
+"https://github.com/noticesax/android_kernel_xiaomi_mt6768-merlinx.git"
 
 ---
 ### Copyright
