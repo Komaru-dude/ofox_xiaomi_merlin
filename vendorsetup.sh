@@ -17,7 +17,7 @@
 #
 # 	Please maintain this if you use this script or any part of it
 #
-FDEVICE="begonia"
+FDEVICE="merlinx"
 
 fox_get_target_device() {
 local chkdev=$(echo "$BASH_SOURCE" | grep \"$FDEVICE\")
@@ -36,8 +36,8 @@ fi
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         export ALLOW_MISSING_DEPENDENCIES=true
         export FOX_ENABLE_APP_MANAGER=1
-	export TARGET_DEVICE_ALT="begoniain"
-	export FOX_TARGET_DEVICES="begoniain,begonia"
+	export TARGET_DEVICE_ALT="merlinx"
+	export FOX_TARGET_DEVICES="merlinx,merlin"
 	export FOX_USE_BASH_SHELL=1
 	export FOX_ASH_IS_BASH=1
 	export FOX_BASH_TO_SYSTEM_BIN=1
@@ -45,7 +45,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_XZ_UTILS=1
 	export FOX_USE_LZ4_BINARY=1
 	export FOX_USE_ZSTD_BINARY=1
-	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v28.1.zip
+	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v27.0.zip
 	export FOX_VANILLA_BUILD=1
 	export FOX_DELETE_INITD_ADDON=1
 	export FOX_USE_BUSYBOX_BINARY=1
@@ -56,6 +56,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 		export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
 		export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
 		export FOX_VARIANT="HWe"; # this will support only hardware encryption
+		echo "Successfully"
 	fi
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then

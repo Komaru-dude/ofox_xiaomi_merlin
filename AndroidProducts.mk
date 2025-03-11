@@ -6,9 +6,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_begonia.mk
+    $(LOCAL_DIR)/twrp_merlinx.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_begonia-user \
-    twrp_begonia-userdebug \
-    twrp_begonia-eng
+    twrp_merlinx-user \
+    twrp_merlinx-userdebug \
+    twrp_merlinx-eng

@@ -7,6 +7,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),begonia)
+ifeq ($(TARGET_DEVICE),merlinx)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif

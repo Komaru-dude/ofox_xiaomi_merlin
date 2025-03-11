@@ -10,7 +10,7 @@
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
-LOCAL_PATH := device/xiaomi/begonia
+LOCAL_PATH := device/xiaomi/merlinx
 
 # API
 PRODUCT_SHIPPING_API_LEVEL := 29
@@ -20,7 +20,7 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
 # framerate
-TW_FRAMERATE := 90
+TW_FRAMERATE := 60
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
@@ -48,31 +48,28 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/recovery/security/miui
 
-# dynamic partitions, fastbootd, etc
-ifeq ($(FOX_USE_DYNAMIC_PARTITIONS),1)
-  PRODUCT_SHIPPING_API_LEVEL := 28
-  PRODUCT_USE_DYNAMIC_PARTITIONS := true
-  PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
+PRODUCT_SHIPPING_API_LEVEL := 29
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+# PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
   
-  PRODUCT_PROPERTY_OVERRIDES += \
-	ro.boot.dynamic_partitions_retrofit=true \
-	ro.boot.dynamic_partitions=true \
-	ro.crypto.dm_default_key.options_format.version=2 \
-	ro.crypto.volume.filenames_mode=aes-256-cts \
-	ro.crypto.volume.metadata.method=dm-default-key \
-	ro.crypto.volume.options=::v2 \
-	ro.crypto.allow_encrypt_override=true
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.boot.dynamic_partitions_retrofit=true \
+ro.boot.dynamic_partitions=true \
+ro.crypto.dm_default_key.options_format.version=2 \
+ro.crypto.volume.filenames_mode=aes-256-cts \
+ro.crypto.volume.metadata.method=dm-default-key \
+ro.crypto.volume.options=::v2 \
+ro.crypto.allow_encrypt_override=true
 
-  # fastbootd - doesn't work (device not detected)
-  TW_INCLUDE_FASTBOOTD := true
-  PRODUCT_PROPERTY_OVERRIDES += \
-	ro.fastbootd.available=true
+# fastbootd - doesn't work (device not detected)
+TW_INCLUDE_FASTBOOTD := true
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.fastbootd.available=true
  
-  PRODUCT_PACKAGES += \
-	android.hardware.fastboot@1.0-impl-mock \
-	android.hardware.fastboot@1.0-impl-mock.recovery \
-	fastbootd
-endif
+PRODUCT_PACKAGES += \
+android.hardware.fastboot@1.0-impl-mock \
+android.hardware.fastboot@1.0-impl-mock.recovery \
+fastbootd
 
 # initial prop for variant
 ifneq ($(FOX_VARIANT),)

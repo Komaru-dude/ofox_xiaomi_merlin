@@ -1,0 +1,91 @@
+import /microtrust_begonia.rc
+
+on early-init
+    start adbd
+
+on init
+    # Create a more standard /dev/block layout for our scripts
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
+    setprop sys.usb.ffs.aio_compat 1
+    setprop sys.usb.configfs 1
+
+# Логика для шифрования
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
+# Сервис для unified-script
+service unified-script /system/bin/unified-script.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+# Сервис для исправления шифрования
+service fix_decryption /system/bin/fix_decryption.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+# Запуск Gatekeeper
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+# Запуск Keymaster
+service keymaster-4-0-beanpod /vendor/bin/hw/android.hardware.keymaster@4.0-service.beanpod
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    user root
+    group root drmrpc
+    disabled
+    seclabel u:r:recovery:s0
+
+# Управление службами в зависимости от состояния шифрования
+on property:hwservicemanager.ready=true
+    write /proc/bootprof "start teei_daemon (on fs)"
+    start teei_daemon
+    write /proc/bootprof "start teei_daemon end (on fs)"
+    start keymaster-4-0-beanpod
+    start gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop teei_daemon
+    stop keymaster-4-0-beanpod
+    stop gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+on property:ro.crypto.state=unencrypted
+    stop teei_daemon
+    stop keymaster-4-0-beanpod
+    stop gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+on property:twrp.decrypt.done=true
+    stop teei_daemon
+    stop keymaster-4-0-beanpod
+    stop gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+# Инициализация файловой системы
+on early-fs
+    write /proc/bootprof "INIT:early-fs"
+    start vold
+
+# Запуск fix_decryption и других команд при инициализации
+on init
+    start fix_decryption
+    exec u:r:recovery:s0 -- /system/bin/sleep 0.5s
+    exec u:r:recovery:s0 -- /system/bin/fix_dynamic_static.sh
+
+# Запуск копирования логов после загрузки
+on boot
+    start unified-script
