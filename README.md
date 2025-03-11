@@ -23,6 +23,8 @@ It was released in May 2020.
 
 ## Notes
 This tree does not support MIUI ROMs.
+The recovery may take a long time to start.   
+Incorrect CPU temperature display.
 
 ## Device picture
 ![merlinx](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-9-4.jpg)
