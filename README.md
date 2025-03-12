@@ -28,8 +28,9 @@ This tree does not support MIUI ROMs. The recovery may take a long time to start
 ![merlinx](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-9-4.jpg)
 
 ---
-## Kernel sources
-"https://github.com/noticesax/android_kernel_xiaomi_mt6768-merlinx.git"
+## Credits
+Base tree: "https://gitlab.com/OrangeFox/device/begonia"
+Kernel sources: "https://github.com/noticesax/android_kernel_xiaomi_mt6768-merlinx.git"
 
 ---
 ### Copyright
