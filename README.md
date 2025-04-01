@@ -22,7 +22,7 @@ It was released in May 2020.
 | Camera (Front)          | 13 MP, f/2.3 
 
 ## Notes
-This tree does not support MIUI ROMs. The recovery may take a long time to start.
+The recovery may take a long time to start.
 
 ## Device picture
 ![merlinx](https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-9-4.jpg)
