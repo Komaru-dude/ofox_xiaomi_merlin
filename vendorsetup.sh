@@ -49,6 +49,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_VANILLA_BUILD=1
 	export FOX_DELETE_INITD_ADDON=1
 	export FOX_USE_BUSYBOX_BINARY=1
+        export OF_MAINTAINER="Komaru-dude"
 
 	# make all builds dynamic
 	export FOX_USE_DYNAMIC_PARTITIONS=1
