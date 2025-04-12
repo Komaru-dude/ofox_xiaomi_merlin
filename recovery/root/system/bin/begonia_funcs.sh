@@ -50,16 +50,9 @@ set_crypt_credentials() {
 	fi
 }
 
-# are we running the dynamic variant of OrangeFox?
+# always return True
 is_dynamic_fox() {
-local d=$(getprop "ro.boot.dynamic_partitions");
-local e=$(getprop "ro.boot.dynamic_partitions_retrofit");
-local v=$(getprop "ro.orangefox.variant");
-	if  [ "$v" = "HWe" -o "$v" = "dynamic" -o "$v" = "HWE" ] || [ "$d" = "true" -a "$e" = "true" ]; then
-		echo "1";
-	else
-		echo "0";
-	fi
+    echo "1";
 }
 
 # report whether the ROM has dynamic partitions
