@@ -30,6 +30,7 @@ The recovery may take a long time to start.
 ---
 ## Credits
 Base tree: "https://gitlab.com/OrangeFox/device/begonia"
+
 Kernel sources: "https://github.com/Komaru-dude/android_kernel_xiaomi_mt6768"
 
 ---
