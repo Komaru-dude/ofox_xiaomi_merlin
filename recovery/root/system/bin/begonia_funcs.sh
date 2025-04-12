@@ -20,7 +20,7 @@
 #
 
 # set to 1 during the testing phase, else set to 0
-debug_mode=0;
+debug_mode=1;
 
 # recovery log file
 LOGF="/tmp/recovery.log";
