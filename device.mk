@@ -50,10 +50,8 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
 
 PRODUCT_SHIPPING_API_LEVEL := 29
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-# PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
   
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.boot.dynamic_partitions_retrofit=true \
 ro.boot.dynamic_partitions=true \
 ro.crypto.dm_default_key.options_format.version=2 \
 ro.crypto.volume.filenames_mode=aes-256-cts \
