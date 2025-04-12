@@ -24,52 +24,11 @@
 
 source /system/bin/begonia_funcs.sh;
 
-# do the work
-process_fstab_files() {
-  local F="/system/etc/recovery.fstab";
-  local TF="/system/etc/twrp.flags";
-  local src_fstab="/system/etc/recovery-non-dynamic.fstab";
-  local src_flags="/system/etc/twrp-non-dynamic.flags";
-
-	local D1=$(is_dynamic_fox);
-	# bale out if this isn't a dynamic OrangeFox build
-	if [ "$D1" != "1" ]; then
-		TESTING_LOG "Non-dynamic builds don't need this process, as they can't handle dynamic ROMs.";
-		return;
-	fi
-
-  local D=$(rom_has_dynamic_partitions);  
-  if [ "$D" = "1" ]; then
-  	src_fstab="/system/etc/recovery-dynamic.fstab";
-  	src_flags="/system/etc/twrp-dynamic.flags";
-  	TESTING_LOG "Dynamic ROM";
-  	setprop "is_dynamic_rom" "true"; # save as a prop
-  	if [ "$D1" = "0" ]; then # this is a non-dynamic OrangeFox build
-		LOGMSG "The installed ROM has retrofitted dynamic partitions.";
-	else
-		resetprop "fox_dynamic_device" "1";
-  	fi
-  else
-    	TESTING_LOG "Non-dynamic ROM";
-  	setprop "is_dynamic_rom" "false"; # save as a prop
-  	if [ "$D1" = "1" ]; then # this is a dynamic OrangeFox build
-		TESTING_LOG "The installed ROM is non-dynamic.";
-  		resetprop "fox_dynamic_device" "0";
-	fi
-  fi
-  
-  # sort out the fstab files
-  TESTING_LOG "Copying $src_fstab to $F";
-  cp -a $src_fstab $F;
-
-  TESTING_LOG "Copying $src_flags to $TF";
-  cp -a $src_flags $TF;
-  
-#  do_cleanup;
-}
+TESTING_LOG "Dynamic ROM";
+setprop "is_dynamic_rom" "true"; # save as a prop
+resetprop "fox_dynamic_device" "1";
 
 # --- #
 TESTING_LOG "Running $0";
-process_fstab_files;
 exit 0;
 #
